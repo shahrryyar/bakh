@@ -9,6 +9,7 @@
 <body>
     <div class="layout">
         <aside class="sidebar">
+               <button class="nav-toggle" onclick="toggleSidebar()">---</button>
             <nav class="category-nav" aria-label="Menu Categories">
                 <h2 class="nav-title">خواردنەکان</h2>
           <ul class="category-list">
@@ -835,5 +836,12 @@
                 </div>
             </div>
         </footer>
+    
+    <script>
+        function toggleSidebar() {
+            const sidebar = document.querySelector('.sidebar');
+            sidebar.classList.toggle('expanded');
+        }
+    </script>
 </body>
 </html>
