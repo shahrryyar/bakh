@@ -7,33 +7,25 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-      <button class="sidebar-toggle" onclick="toggleSidebar()">
-        <span></span>
-        <span></span>
-        <span></span>
-    </button>
-
-    <!-- Overlay -->
-    <div class="overlay" onclick="closeSidebar()"></div>
     <div class="layout">
         <aside class="sidebar">
             <nav class="category-nav">
                 <h2 class="nav-title">خواردنەکان</h2>
-                 <ul class="category-list">
-                    <li><a href="#میوەکان" class="menu-section-link">میوەکان</a></li>
-                    <li><a href="#شیرینی-و-کێکەکان"  class="menu-section-link">شیرینی و کێکەکان</a></li>
-                    <li><a href="#مۆهیتۆکان"  class="menu-section-link">مۆهیتۆکان</a></li>
-                    <li><a href="#مەکسیکیەکان"  class="menu-section-link">مەکسیکیەکان</a></li>
-                    <li><a href="#میڵک-شەیکەکان"  class="menu-section-link">میڵک شەیکەکان</a></li>
-                    <li><a href="#قاوەکان"  class="menu-section-link">قاوەکان</a></li>
-                    <li><a href="#کونافە"  class="menu-section-link">کونافە</a></li>
-                    <li><a href="#شەربەتە-فرێشەکان"  class="menu-section-link">شەربەتە فرێشەکان</a></li>
-                    <li><a href="#خواردنەوە-گەرمەکان"  class="menu-section-link">خواردنەوە گەرمەکان</a></li>
-                    <li><a href="#قاوە-ساردەکان"  class="menu-section-link">قاوە ساردەکان</a></li>
-                    <li><a href="#ایس-کرێمەکان"  class="menu-section-link">ئایس کرێمەکان</a></li>
-                    <li><a href="#کریپەکان"  class="menu-section-link">کریپەکان</a></li>
-                    <li><a href="#وافڵ-و-پان-کێکەکان"  class="menu-section-link">وافڵ و پان کێکەکان</a></li>
-                    <li><a href="#سموزیەکان"  class="menu-section-link">سموزیەکان</a></li>
+                <ul class="category-list">
+                    <li><a href="#میوەکان">میوەکان</a></li>
+                    <li><a href="#شیرینی-و-کێکەکان">شیرینی و کێکەکان</a></li>
+                    <li><a href="#مۆهیتۆکان">مۆهیتۆکان</a></li>
+                    <li><a href="#مەکسیکیەکان">مەکسیکیەکان</a></li>
+                    <li><a href="#میڵک-شەیکەکان">میڵک شەیکەکان</a></li>
+                    <li><a href="#قاوەکان">قاوەکان</a></li>
+                    <li><a href="#کونافە">کونافە</a></li>
+                    <li><a href="#شەربەتە-فرێشەکان">شەربەتە فرێشەکان</a></li>
+                    <li><a href="#خواردنەوە-گەرمەکان">خواردنەوە گەرمەکان</a></li>
+                    <li><a href="#قاوە-ساردەکان">قاوە ساردەکان</a></li>
+                    <li><a href="#ایس-کرێمەکان">ئایس کرێمەکان</a></li>
+                    <li><a href="#کریپەکان">کریپەکان</a></li>
+                    <li><a href="#وافڵ-و-پان-کێکەکان">وافڵ و پان کێکەکان</a></li>
+                    <li><a href="#سموزیەکان">سموزیەکان</a></li>
                 </ul>
             </nav>
         </aside>
@@ -843,70 +835,67 @@
                 </div>
             </div>
         </footer>
-   <script>
-    // Toggle sidebar open/close
-    function toggleSidebar() {
-        const sidebar = document.getElementById('sidebar');
-        const overlay = document.querySelector('.overlay');
-        const toggle = document.querySelector('.sidebar-toggle');
-
-        sidebar.classList.toggle('open');
-        overlay.classList.toggle('active');
-        if (toggle) toggle.classList.toggle('active');
-    }
-
-    function closeSidebar() {
-        const sidebar = document.getElementById('sidebar');
-        const overlay = document.querySelector('.overlay');
-        const toggle = document.querySelector('.sidebar-toggle');
-
-        sidebar.classList.remove('open');
-        overlay.classList.remove('active');
-        if (toggle) toggle.classList.remove('active');
-    }
-
-    // Escape key closes sidebar
-    document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape') {
-            closeSidebar();
+         <script>
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.querySelector('.overlay');
+            
+            sidebar.classList.toggle('open');
+            overlay.classList.toggle('active');
         }
-    });
 
-    // Touch swipe to close
-    let startX = 0;
-    let currentX = 0;
-    let isDragging = false;
-
-    document.addEventListener('touchstart', function(e) {
-        startX = e.touches[0].clientX;
-        isDragging = true;
-    });
-
-    document.addEventListener('touchmove', function(e) {
-        if (!isDragging) return;
-        currentX = e.touches[0].clientX;
-        const diffX = startX - currentX;
-
-        if (diffX > 50) {
-            closeSidebar();
-            isDragging = false;
+        function closeSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.querySelector('.overlay');
+            
+            sidebar.classList.remove('open');
+            overlay.classList.remove('active');
         }
-    });
 
-    document.addEventListener('touchend', function() {
-        isDragging = false;
-    });
-
-    // Close sidebar on overlay click
-    document.querySelector('.overlay').addEventListener('click', toggleSidebar);
-
-    // ✅ Close sidebar when clicking a category link
-    document.querySelectorAll('.menu-section-link').forEach(link => {
-        link.addEventListener('click', () => {
-            closeSidebar();
+        // Close sidebar when pressing Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeSidebar();
+            }
         });
-    });
-</script>
 
+        // Handle touch events for mobile
+        let startX = 0;
+        let currentX = 0;
+        let isDragging = false;
+
+        document.addEventListener('touchstart', function(e) {
+            startX = e.touches[0].clientX;
+        });
+
+        document.addEventListener('touchmove', function(e) {
+            if (!isDragging) return;
+            currentX = e.touches[0].clientX;
+            const diffX = startX - currentX;
+            
+            if (diffX > 50) { // Swipe left to close
+                closeSidebar();
+                isDragging = false;
+            }
+        });
+
+        document.addEventListener('touchend', function() {
+            isDragging = false;
+        });
+        function toggleSidebar() {
+    const sidebar = document.querySelector('.sidebar');
+    const overlay = document.querySelector('.overlay');
+    const toggle = document.querySelector('.sidebar-toggle');
+    
+    sidebar.classList.toggle('open');
+    overlay.classList.toggle('active');
+    toggle.classList.toggle('active');
+}
+
+// Close sidebar when clicking overlay
+document.querySelector('.overlay').addEventListener('click', toggleSidebar);
+
+
+    </script>
 </body>
 </html>
