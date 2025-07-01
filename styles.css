@@ -65,6 +65,64 @@ body {
     width: 6px;
 }
 
+/* Make category list scroll horizontally */
+.category-list {
+  display: flex;
+  overflow-x: auto;
+  gap: 8px;
+  padding: 8px 0;
+}
+.category-list li {
+  flex: 0 0 auto;
+}
+
+/* Ensure all links/buttons are at least 44×44px for tappability */
+.category-list a,
+.category-list a:hover,
+.menu-item,
+.menu-item:hover,
+.footer-links a,
+.social-links a {
+  min-height: 44px;
+  line-height: 44px;
+}
+
+/* Sticky section headings */
+.menu-section .section-title {
+  position: sticky;
+  top: 56px;      /* adjust if your header is taller */
+  background: var(--background-color);
+  z-index: 5;
+}
+
+/* Lazy‑load hint — no JS needed, just mark your <img> */
+.menu-image img {
+  loading: lazy;
+}
+
+/* Ensure images shrink on very small screens */
+.menu-image {
+  height: 140px;   /* instead of your 150px or 170px */
+}
+
+/* Optional: hide sidebar by default, show via toggle */
+.sidebar {
+  display: none;
+}
+/* if you add a `.menu-toggle` button, this will reveal it: */
+.menu-toggle:checked + .sidebar {
+  display: block;
+  position: absolute;
+  width: 80%;
+  max-width: 300px;
+  right: 0;
+  top: 0;
+  height: 100vh;
+  background: var(--sidebar-background);
+  z-index: 1000;
+}
+
+
 .sidebar::-webkit-scrollbar-track {
     background: var(--sidebar-background);
 }
@@ -288,63 +346,23 @@ header {
     }
 }
 
-/* Make category list scroll horizontally */
-.category-list {
-  display: flex;
-  overflow-x: auto;
-  gap: 8px;
-  padding: 8px 0;
-}
-.category-list li {
-  flex: 0 0 auto;
-}
+@media (max-width: 768px) {
+    .layout {
+        flex-direction: column;
+    }
 
-/* Ensure all links/buttons are at least 44×44px for tappability */
-.category-list a,
-.category-list a:hover,
-.menu-item,
-.menu-item:hover,
-.footer-links a,
-.social-links a {
-  min-height: 44px;
-  line-height: 44px;
-}
+    .sidebar {
+        position: static;
+        width: 100%;
+        height: auto;
+        max-height: 300px;
+        border-left: none;
+        border-bottom: 1px solid var(--border-color);
+    }
 
-/* Sticky section headings */
-.menu-section .section-title {
-  position: sticky;
-  top: 56px;      /* adjust if your header is taller */
-  background: var(--background-color);
-  z-index: 5;
-}
-
-/* Lazy‑load hint — no JS needed, just mark your <img> */
-.menu-image img {
-  loading: lazy;
-}
-
-/* Ensure images shrink on very small screens */
-.menu-image {
-  height: 140px;   /* instead of your 150px or 170px */
-}
-
-/* Optional: hide sidebar by default, show via toggle */
-.sidebar {
-  display: none;
-}
-/* if you add a `.menu-toggle` button, this will reveal it: */
-.menu-toggle:checked + .sidebar {
-  display: block;
-  position: absolute;
-  width: 80%;
-  max-width: 300px;
-  right: 0;
-  top: 0;
-  height: 100vh;
-  background: var(--sidebar-background);
-  z-index: 1000;
-}
-
+    .main-content {
+        margin-right: 0;
+    }
 
     .menu-grid {
         grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
@@ -377,6 +395,29 @@ header {
     }
 }
 
+@media (max-width: 480px) {
+    .menu-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .menu-item {
+        max-width: 300px;
+        margin: 0 auto;
+    }
+
+    .title {
+        font-size: 2rem;
+    }
+
+    .section-title {
+        font-size: 1.6rem;
+        margin-bottom: 25px;
+    }
+
+    .sidebar {
+        max-height: 250px;
+    }
+}
 
 /* Loading animation for images */
 .menu-image.loading::before {
@@ -641,27 +682,4 @@ header {
     .social-links {
         max-width: 150px;
     }
-}
-html {
-  font-size: clamp(14px, 2vw + 1rem, 18px);
-}
-.title {
-  font-size: clamp(2rem, 5vw + 1rem, 3rem);
-}
-.section-title {
-  font-size: clamp(1.5rem, 4vw + 0.5rem, 2rem);
-}
-.menu-image {
-  aspect-ratio: 4 / 3;
-  width: 100%;
-  object-fit: cover;
-}
-.menu-sections {
-  scroll-snap-type: y mandatory;
-  overflow-y: auto;
-  max-height: 100vh;
-}
-.menu-section {
-  scroll-snap-align: start;
-  padding-top: 1rem; /* space for sticky header */
 }
