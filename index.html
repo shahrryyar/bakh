@@ -902,6 +902,22 @@
 
 // Close sidebar when clicking overlay
 document.querySelector('.overlay').addEventListener('click', toggleSidebar);
+
+
+             document.querySelectorAll('.menu-section').forEach(section => {
+    const categoryName = section.querySelector('.section-title').textContent.trim();
+    const items = section.querySelectorAll('.menu-item');
+
+    items.forEach(item => {
+        // Create a label element
+        const label = document.createElement('span');
+        label.className = 'category-label';
+        label.textContent = categoryName;
+
+        // Inject into item
+        item.prepend(label);
+    });
+});
     </script>
 </body>
 </html>
