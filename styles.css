@@ -33,11 +33,12 @@ body {
     font-family: var(--kurdish-fonts);
     background-color: var(--background-color);
     color: var(--text-color);
-    line-height: 1.8; /* Increased line height for better Kurdish text readability */
+    line-height: 1.8;
     min-height: 100vh;
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
 }
 
 .layout {
@@ -45,83 +46,104 @@ body {
     min-height: 100vh;
 }
 
-/* Sidebar Styles */
+/* Sidebar Toggle Button */
+.sidebar-toggle {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+    background: var(--card-background);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    cursor: pointer;
+    z-index: 1001;
+    transition: all var(--transition-speed) ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    backdrop-filter: blur(10px);
+}
+
+.sidebar-toggle:hover {
+    background: var(--primary-light);
+    border-color: var(--primary-color);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(196, 164, 60, 0.2);
+}
+
+.sidebar-toggle span {
+    display: block;
+    width: 20px;
+    height: 2px;
+    background: var(--text-color);
+    transition: all var(--transition-speed) ease;
+    border-radius: 1px;
+}
+
+.sidebar-toggle:hover span {
+    background: var(--primary-color);
+}
+
+.sidebar-toggle.active span:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+}
+
+.sidebar-toggle.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.sidebar-toggle.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(7px, -6px);
+}
+
+/* Overlay */
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.7);
+    opacity: 0;
+    visibility: hidden;
+    transition: all var(--transition-speed) ease;
+    z-index: 999;
+    backdrop-filter: blur(5px);
+}
+
+.overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Sidebar Styles - Modified for slide-out functionality */
 .sidebar {
     width: var(--sidebar-width);
     background-color: var(--sidebar-background);
     position: fixed;
-    right: 0;
+    right: calc(-1 * var(--sidebar-width)); /* Hidden by default */
     top: 0;
     height: 100vh;
     overflow-y: auto;
     border-left: 1px solid var(--border-color);
-    padding: 20px 0;
+    padding: 80px 0 20px; /* Added top padding for toggle button */
     box-shadow: -2px 0 10px rgba(0, 0, 0, 0.5);
     z-index: 1000;
     backdrop-filter: blur(10px);
+    transition: right var(--transition-speed) ease;
+}
+
+/* Sidebar open state */
+.sidebar.open {
+    right: 0;
 }
 
 .sidebar::-webkit-scrollbar {
     width: 6px;
 }
-
-/* Make category list scroll horizontally */
-.category-list {
-  display: flex;
-  overflow-x: auto;
-  gap: 8px;
-  padding: 8px 0;
-}
-.category-list li {
-  flex: 0 0 auto;
-}
-
-/* Ensure all links/buttons are at least 44×44px for tappability */
-.category-list a,
-.category-list a:hover,
-.menu-item,
-.menu-item:hover,
-.footer-links a,
-.social-links a {
-  min-height: 44px;
-  line-height: 44px;
-}
-
-/* Sticky section headings */
-.menu-section .section-title {
-  position: sticky;
-  top: 56px;      /* adjust if your header is taller */
-  background: var(--background-color);
-  z-index: 5;
-}
-
-/* Lazy‑load hint — no JS needed, just mark your <img> */
-.menu-image img {
-  loading: lazy;
-}
-
-/* Ensure images shrink on very small screens */
-.menu-image {
-  height: 140px;   /* instead of your 150px or 170px */
-}
-
-/* Optional: hide sidebar by default, show via toggle */
-.sidebar {
-  display: none;
-}
-/* if you add a `.menu-toggle` button, this will reveal it: */
-.menu-toggle:checked + .sidebar {
-  display: block;
-  position: absolute;
-  width: 80%;
-  max-width: 300px;
-  right: 0;
-  top: 0;
-  height: 100vh;
-  background: var(--sidebar-background);
-  z-index: 1000;
-}
-
 
 .sidebar::-webkit-scrollbar-track {
     background: var(--sidebar-background);
@@ -182,11 +204,11 @@ body {
     border-right-color: var(--primary-color);
 }
 
-/* Main Content Styles */
+/* Main Content Styles - No longer needs margin for sidebar */
 .main-content {
     flex: 1;
     padding: 20px;
-    margin-right: var(--sidebar-width);
+    width: 100%; /* Full width since sidebar is now hidden */
 }
 
 header {
@@ -317,8 +339,8 @@ header {
     margin-top: auto;
     transition: all var(--transition-speed) ease;
     border: 1px solid transparent;
-    font-feature-settings: "tnum"; /* For better number alignment in Kurdish */
-    direction: ltr; /* Keep numbers left-to-right */
+    font-feature-settings: "tnum";
+    direction: ltr;
 }
 
 .menu-item:hover .price {
@@ -339,29 +361,15 @@ header {
 
     .sidebar {
         width: 240px;
-    }
-
-    .main-content {
-        margin-right: 240px;
+        right: -240px; /* Adjust hidden position */
     }
 }
 
 @media (max-width: 768px) {
-    .layout {
-        flex-direction: column;
-    }
-
     .sidebar {
-        position: static;
         width: 100%;
-        height: auto;
-        max-height: 300px;
-        border-left: none;
-        border-bottom: 1px solid var(--border-color);
-    }
-
-    .main-content {
-        margin-right: 0;
+        right: -100%; /* Full width slide on mobile */
+        padding-top: 80px;
     }
 
     .menu-grid {
@@ -393,6 +401,17 @@ header {
     .category-list a {
         padding: 8px 20px;
     }
+
+    .sidebar-toggle {
+        top: 15px;
+        right: 15px;
+        width: 45px;
+        height: 45px;
+    }
+
+    .sidebar-toggle span {
+        width: 18px;
+    }
 }
 
 @media (max-width: 480px) {
@@ -415,7 +434,19 @@ header {
     }
 
     .sidebar {
-        max-height: 250px;
+        padding-top: 70px;
+    }
+
+    .sidebar-toggle {
+        width: 40px;
+        height: 40px;
+        top: 10px;
+        right: 10px;
+    }
+
+    .sidebar-toggle span {
+        width: 16px;
+        height: 2px;
     }
 }
 
@@ -441,13 +472,12 @@ header {
     }
 }
 
-/* Footer Styles */
+/* Footer Styles - Adjusted for full width */
 .footer {
     background-color: var(--sidebar-background);
     padding: 40px 20px;
     margin-top: 60px;
     border-top: 1px solid var(--border-color);
-    margin-right: var(--sidebar-width);
     position: relative;
     overflow: hidden;
 }
@@ -521,7 +551,7 @@ header {
 
 .footer-links a:hover {
     color: var(--primary-color);
-    transform: translateX(5px); /* Changed to match RTL direction */
+    transform: translateX(5px);
 }
 
 .social-links {
@@ -565,7 +595,7 @@ header {
 }
 
 .contact-info li span {
-    direction: ltr; /* Keep phone numbers and emails left-to-right */
+    direction: ltr;
     unicode-bidi: embed;
 }
 
@@ -595,11 +625,11 @@ header {
 
 .contact-info i {
     color: var(--primary-color);
-    order: 1; /* Move icons to the left in RTL layout */
+    order: 1;
 }
 
 .contact-info span {
-    order: 2; /* Keep text on the right in RTL layout */
+    order: 2;
 }
 
 .footer-bottom {
@@ -609,12 +639,11 @@ header {
     border-top: 1px solid var(--border-color);
     color: #666;
     font-size: 0.9rem;
-    font-weight: 500; /* Better readability for Kurdish text */
+    font-weight: 500;
 }
 
 @media (max-width: 768px) {
     .footer {
-        margin-right: 0;
         padding: 30px 15px;
     }
 
@@ -646,15 +675,15 @@ header {
     }
 
     .contact-info li {
-        flex-direction: row-reverse; /* Reverse icon and text order on mobile */
+        flex-direction: row-reverse;
     }
 
     .contact-info i {
-        order: 2; /* Move icons to right on mobile */
+        order: 2;
     }
 
     .contact-info span {
-        order: 1; /* Move text to left on mobile */
+        order: 1;
     }
 
     .social-links {
