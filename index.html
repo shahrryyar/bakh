@@ -2,13 +2,13 @@
 <html lang="ku" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>باخ کافی - Bakh Cafe</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="layout">
-          <aside class="sidebar">
+        <aside class="sidebar">
             <nav class="category-nav">
                 <h2 class="nav-title">خواردنەکان</h2>
                 <ul class="category-list">
@@ -29,6 +29,7 @@
                 </ul>
             </nav>
         </aside>
+
         <main class="main-content">
             <header>
                 <h1 class="title">باخ کافی</h1>
@@ -834,12 +835,65 @@
                 </div>
             </div>
         </footer>
-    
-    <script>
+         <script>
         function toggleSidebar() {
-            const sidebar = document.querySelector('.sidebar');
-            sidebar.classList.toggle('expanded');
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.querySelector('.overlay');
+            
+            sidebar.classList.toggle('open');
+            overlay.classList.toggle('active');
         }
+
+        function closeSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.querySelector('.overlay');
+            
+            sidebar.classList.remove('open');
+            overlay.classList.remove('active');
+        }
+
+        // Close sidebar when pressing Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeSidebar();
+            }
+        });
+
+        // Handle touch events for mobile
+        let startX = 0;
+        let currentX = 0;
+        let isDragging = false;
+
+        document.addEventListener('touchstart', function(e) {
+            startX = e.touches[0].clientX;
+        });
+
+        document.addEventListener('touchmove', function(e) {
+            if (!isDragging) return;
+            currentX = e.touches[0].clientX;
+            const diffX = startX - currentX;
+            
+            if (diffX > 50) { // Swipe left to close
+                closeSidebar();
+                isDragging = false;
+            }
+        });
+
+        document.addEventListener('touchend', function() {
+            isDragging = false;
+        });
+        function toggleSidebar() {
+    const sidebar = document.querySelector('.sidebar');
+    const overlay = document.querySelector('.overlay');
+    const toggle = document.querySelector('.sidebar-toggle');
+    
+    sidebar.classList.toggle('open');
+    overlay.classList.toggle('active');
+    toggle.classList.toggle('active');
+}
+
+// Close sidebar when clicking overlay
+document.querySelector('.overlay').addEventListener('click', toggleSidebar);
     </script>
 </body>
 </html>
