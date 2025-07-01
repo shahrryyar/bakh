@@ -14,26 +14,7 @@
     /* Kurdish font stack */
     --kurdish-fonts: 'Rabar_027', 'NRT', 'Peshang', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 }
-.menu-item {
-    position: relative;
-    border-radius: 12px;
-    padding: 15px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    overflow: hidden;
-}
 
-.category-label {
-    position: absolute;
-    top: 10px;
-    left: 10px;
-    background-color: #ff9800;
-    color: white;
-    padding: 3px 8px;
-    font-size: 12px;
-    border-radius: 10px;
-    font-weight: bold;
-    z-index: 2;
-}
 
 /* Kurdish text optimization */
 @font-face {
