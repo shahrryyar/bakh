@@ -278,7 +278,7 @@ header {
 /* Improved grid system with better mobile responsiveness */
 .menu-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(min(280px, 100%), 1fr));
+grid-template-columns: repeat(2, lfr);
     gap: var(--spacing-md);
     place-items: center;
 }
@@ -304,6 +304,8 @@ header {
     box-shadow: var(--card-shadow);
     /* Improved mobile touch response */
     -webkit-tap-highlight-color: transparent;
+      min-height: 280px;
+      margin: 0;
 }
 
 .menu-item::before {
