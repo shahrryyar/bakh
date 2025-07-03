@@ -278,7 +278,7 @@ header {
 /* Improved grid system with better mobile responsiveness */
 .menu-grid {
     display: grid;
-    grid-template-columns: repeat(2, lfr);
+    grid-template-columns: repeat(2, 1fr);
     gap: var(--spacing-md);
     place-items: center;
 }
@@ -657,16 +657,16 @@ header {
     }
 
     .menu-grid {
-        grid-template-columns: repeat(auto-fill, minmax(min(220px, 100%), 1fr));
+        grid-template-columns: repeat(2,1fr);
         gap: var(--spacing-sm);
     }
     
     .menu-image {
-        height: 160px;
+        height: 140px;
     }
 
     .menu-item {
-        min-height: 280px;
+        min-height: 260px;
         padding: var(--spacing-sm);
     }
 
@@ -738,18 +738,19 @@ header {
     }
     
     .menu-grid {
-        grid-template-columns: 1fr;
+        grid-template-columns: repeat(2,minmax(0,1fr));
         gap: var(--spacing-md);
     }
 
     .menu-item {
-        max-width: min(350px, 100%);
-        margin: 0 auto;
-        min-height: 280px;
+        max-width: 100%;
+        margin: 0;
+        min-height: 240px;
+        padding: var(--spacing-sm);
     }
     
     .menu-image {
-        height: 150px;
+        height: 120px;
     }
 
     .sidebar {
