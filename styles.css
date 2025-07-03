@@ -101,19 +101,20 @@ body {
     transform: translateX(0);
 }
 
-/* Mobile sidebar toggle */
+/* Mobile sidebar toggle *//* Mobile sidebar toggle */
 .sidebar-toggle {
     display: none;
-    position: fixed;
-    top: var(--spacing-md);
-    right: var(--spacing-md);
+    position: absolute; /* Change to absolute to align near dots */
+    top: var(--spacing-sm); /* Adjust spacing to move closer to the dots */
+    right: var(--spacing-sm); /* Adjust spacing */
     z-index: 1001;
-    background: var(--glass-bg);
+    background: rgba(0, 0, 0, 0.8); /* Darker background for better visibility */
     backdrop-filter: blur(10px);
-    border: 1px solid var(--glass-border);
+    border: 1px solid rgba(255, 255, 255, 0.6); /* Light border for contrast */
     border-radius: var(--border-radius-small);
     padding: var(--spacing-xs);
-    color: var(--primary-color);
+    color: white; /* Change text color to white for better visibility */
+    font-weight: bold; /* Make text bold for better readability */
     cursor: pointer;
     transition: all var(--transition-speed) ease;
     width: 44px;
