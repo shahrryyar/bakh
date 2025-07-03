@@ -98,11 +98,9 @@ body {
     z-index: 1000;
     transition: transform var(--transition-speed) ease;
     /* Mobile slide-in functionality */
-    transform: translateX(/* Sidebar toggle button */
-    
-    
-    
-    
+    transform: translateX(0);
+}
+
 /* Mobile sidebar toggle */
 .sidebar-toggle {
     display: none;
@@ -280,7 +278,7 @@ header {
 /* Improved grid system with better mobile responsiveness */
 .menu-grid {
     display: grid;
-grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, lfr);
     gap: var(--spacing-md);
     place-items: center;
 }
@@ -659,16 +657,16 @@ grid-template-columns: repeat(2, 1fr);
     }
 
     .menu-grid {
-        grid-template-columns: repeat(2,1fr);
+        grid-template-columns: repeat(auto-fill, minmax(min(220px, 100%), 1fr));
         gap: var(--spacing-sm);
-}
+    }
     
     .menu-image {
-        height: 140px;
+        height: 160px;
     }
 
     .menu-item {
-        min-height: 260px;
+        min-height: 280px;
         padding: var(--spacing-sm);
     }
 
@@ -740,20 +738,18 @@ grid-template-columns: repeat(2, 1fr);
     }
     
     .menu-grid {
-        grid-template-columns: repeat(2,minmax(0,1fr));
+        grid-template-columns: 1fr;
         gap: var(--spacing-md);
     }
 
-      
     .menu-item {
-        max-width: 100%; /* Full grid width */
-        margin: 0; /* Remove centering */
-        min-height: 240px;
-        padding: var(--spacing-sm);
+        max-width: min(350px, 100%);
+        margin: 0 auto;
+        min-height: 280px;
     }
     
     .menu-image {
-        height: 120px;
+        height: 150px;
     }
 
     .sidebar {
