@@ -103,20 +103,19 @@ body {
     
     
     
-    
+/* Mobile sidebar toggle */
 .sidebar-toggle {
-    position: absolute; /* Ensure it's positioned relative to the parent container */
-    top: 50%; /* Center vertically relative to the three-dots menu */
-    right: calc(var(--spacing-sm) + 44px); /* Position it horizontally next to the three-dots */
-    transform: translateY(-50%); /* Center vertically */
+    display: none;
+    position: fixed;
+    top: var(--spacing-md);
+    right: var(--spacing-md);
     z-index: 1001;
-    background: rgba(0, 0, 0, 0.8); /* Darker background for visibility */
+    background: var(--glass-bg);
     backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.6); /* Light border for contrast */
+    border: 1px solid var(--glass-border);
     border-radius: var(--border-radius-small);
     padding: var(--spacing-xs);
-    color: white; /* Text visibility */
-    font-weight: bold; /* Make text bold */
+    color: var(--primary-color);
     cursor: pointer;
     transition: all var(--transition-speed) ease;
     width: 44px;
@@ -126,11 +125,9 @@ body {
     justify-content: center;
 }
 
-
-
 .sidebar-toggle:hover {
-    background: var(--background-color);
-    color: var(--primary-color);
+    background: var(--primary-color);
+    color: var(--background-color);
     transform: scale(1.1);
 }
 
