@@ -98,23 +98,25 @@ body {
     z-index: 1000;
     transition: transform var(--transition-speed) ease;
     /* Mobile slide-in functionality */
-    transform: translateX(0);
-}
-
-/* Mobile sidebar toggle *//* Mobile sidebar toggle */
+    transform: translateX(/* Sidebar toggle button */
+    
+    
+    
+    
+    
 .sidebar-toggle {
-    display: none;
-    position: absolute; /* Change to absolute to align near dots */
-    top: var(--spacing-sm); /* Adjust spacing to move closer to the dots */
-    right: var(--spacing-sm); /* Adjust spacing */
+    position: absolute; /* Ensure it's positioned relative to the parent container */
+    top: 50%; /* Center vertically relative to the three-dots menu */
+    right: calc(var(--spacing-sm) + 44px); /* Position it horizontally next to the three-dots */
+    transform: translateY(-50%); /* Center vertically */
     z-index: 1001;
-    background: rgba(0, 0, 0, 0.8); /* Darker background for better visibility */
+    background: rgba(0, 0, 0, 0.8); /* Darker background for visibility */
     backdrop-filter: blur(10px);
     border: 1px solid rgba(255, 255, 255, 0.6); /* Light border for contrast */
     border-radius: var(--border-radius-small);
     padding: var(--spacing-xs);
-    color: white; /* Change text color to white for better visibility */
-    font-weight: bold; /* Make text bold for better readability */
+    color: white; /* Text visibility */
+    font-weight: bold; /* Make text bold */
     cursor: pointer;
     transition: all var(--transition-speed) ease;
     width: 44px;
@@ -124,9 +126,11 @@ body {
     justify-content: center;
 }
 
+
+
 .sidebar-toggle:hover {
-    background: var(--primary-color);
-    color: var(--background-color);
+    background: var(--background-color);
+    color: var(--primary-color);
     transform: scale(1.1);
 }
 
